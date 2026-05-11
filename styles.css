@@ -1029,7 +1029,7 @@ button { font: inherit; cursor: pointer; border: none; background: none; color: 
     .about__media { max-width: 480px; margin: 0 auto; width: 100%; }
     .contact__inner { grid-template-columns: 1fr; }
     .gallery__grid { grid-template-columns: repeat(3, 1fr); }
-    .footer__inner { grid-template-columns: 1fr; gap: 40px; }
+    .footer__inner { grid-template-columns: 1fr; gap: 28px; padding: 36px 24px 24px; }
 }
 
 @media (max-width: 768px) {
@@ -1079,8 +1079,26 @@ button { font: inherit; cursor: pointer; border: none; background: none; color: 
     .gallery__item--wide { grid-column: span 2; }
     .gallery__item--tall { grid-row: span 2; }
 
-    .footer__cols { grid-template-columns: 1fr; gap: 24px; }
-    .footer__bottom .container { justify-content: center; text-align: center; }
+    /* Footer mobile — gọn ngang 3 cột thay vì stack */
+    .footer__inner { padding: 28px 20px 16px; gap: 22px; }
+    .footer__brand .logo--md { font-size: 1.2rem; }
+    .footer__brand p { font-size: .78rem; margin-top: 6px; max-width: 100%; line-height: 1.5; }
+    .footer__cols {
+        grid-template-columns: repeat(3, 1fr);
+        gap: 16px;
+    }
+    .footer__col h4 {
+        font-size: .66rem;
+        letter-spacing: .14em;
+        margin-bottom: 10px;
+    }
+    .footer__col ul li {
+        font-size: .76rem;
+        margin-bottom: 5px;
+        line-height: 1.45;
+    }
+    .footer__bottom { padding: 12px 0; font-size: .7rem; }
+    .footer__bottom .container { justify-content: center; text-align: center; gap: 4px; }
 
     .contact__map { min-height: 280px; aspect-ratio: auto; }
 }
@@ -1095,6 +1113,19 @@ button { font: inherit; cursor: pointer; border: none; background: none; color: 
     .menu-card { padding: 28px 22px; }
     .contact__list { grid-template-columns: 1fr; }
     .logo--lg { font-size: 1.6rem; }
+
+    /* Footer rất hẹp — 2 cột để text liên hệ thoáng */
+    .footer__cols {
+        grid-template-columns: 1fr 1fr;
+        gap: 18px 14px;
+    }
+    .footer__col:first-child { grid-column: 1 / -1; }
+    .footer__col:first-child ul {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 4px 14px;
+    }
+    .footer__col:first-child ul li { margin-bottom: 0; }
 }
 
 /* ---------- A11y utility ---------- */
