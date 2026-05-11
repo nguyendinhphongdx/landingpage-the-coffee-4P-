@@ -22,7 +22,7 @@
     --shadow-md: 0 8px 24px rgba(62, 36, 24, .12);
     --shadow-lg: 0 16px 48px rgba(62, 36, 24, .18);
 
-    --font-display: "Playfair Display", "Cormorant Garamond", Georgia, serif;
+    --font-display: "Fraunces", "Cormorant Garamond", Georgia, serif;
     --font-body:    "Lora", Georgia, "Times New Roman", serif;
 
     --radius-sm: 6px;
@@ -63,15 +63,30 @@ a:hover { color: var(--color-accent-dark); }
 
 h1, h2, h3, h4 {
     font-family: var(--font-display);
-    font-weight: 600;
+    font-weight: 500;
     line-height: 1.2;
     color: var(--color-brand-dark);
-    letter-spacing: -.01em;
+    letter-spacing: -.005em;
+    /* Fraunces axes: opsz cho optical sizing, SOFT để chữ mềm hơn */
+    font-variation-settings: "opsz" 96, "SOFT" 100, "WONK" 0;
 }
 h1 em, h2 em, h3 em {
     font-style: italic;
     color: var(--color-accent-dark);
     font-weight: 400;
+    font-variation-settings: "opsz" 96, "SOFT" 100, "WONK" 0;
+}
+
+/* Áp soft axis cho mọi chỗ dùng Fraunces display font */
+.logo__text,
+.menu-card__list strong,
+.menu-card__list .price,
+.about__badge-num,
+.about__badge-text,
+.quote blockquote p,
+.quote__mark,
+.faq__question {
+    font-variation-settings: "opsz" 24, "SOFT" 100, "WONK" 0;
 }
 
 p { color: var(--color-text-soft); }
