@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+        xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">
+    <url>
+        <loc>https://4pcoffee.vn/</loc>
+        <lastmod>2026-05-11</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>1.0</priority>
+        <image:image>
+            <image:loc>https://4pcoffee.vn/images/fb-01.jpg</image:loc>
+            <image:caption>Không gian 4P+ Coffee tại 120 Trung Kính, Yên Hoà</image:caption>
+        </image:image>
+        <image:image>
+            <image:loc>https://4pcoffee.vn/images/fb-28.jpg</image:loc>
+            <image:caption>Sân ngoài trời 4P+ Coffee — đèn lồng đỏ Hội An</image:caption>
+        </image:image>
+        <image:image>
+            <image:loc>https://4pcoffee.vn/images/fb-14.jpg</image:loc>
+            <image:caption>Đèn lồng đỏ kiểu Hội An tại 4P+ Coffee</image:caption>
+        </image:image>
+        <image:image>
+            <image:loc>https://4pcoffee.vn/images/fb-10.jpg</image:loc>
+            <image:caption>Lối vào 4P+ Coffee — Welcome</image:caption>
+        </image:image>
+        <image:image>
+            <image:loc>https://4pcoffee.vn/images/fb-19.jpg</image:loc>
+            <image:caption>Đồ uống mùa hè 4P+: Trà hoa quả, Dừa tươi, Olong xoài macchiato</image:caption>
+        </image:image>
+        <image:image>
+            <image:loc>https://4pcoffee.vn/images/fb-22.jpg</image:loc>
+            <image:caption>Bức tường vintage báo và cờ đỏ tại 4P+ Coffee</image:caption>
+        </image:image>
+    </url>
+</urlset>

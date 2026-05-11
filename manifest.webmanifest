@@ -1,0 +1,42 @@
+{
+  "name": "4P+ Coffee — Cafe vintage tại Trung Kính, Yên Hoà, Hà Nội",
+  "short_name": "4P+ Coffee",
+  "description": "Quán cà phê vintage ấm cúng tại 120 Trung Kính, Yên Hoà, Cầu Giấy, Hà Nội. Đèn lồng Hội An, sân vườn ngoài trời, phòng riêng cho làm việc.",
+  "start_url": "/",
+  "scope": "/",
+  "display": "standalone",
+  "orientation": "portrait",
+  "lang": "vi-VN",
+  "dir": "ltr",
+  "background_color": "#FAF3E0",
+  "theme_color": "#3E2723",
+  "categories": ["food", "lifestyle", "business"],
+  "icons": [
+    {
+      "src": "images/fb-01.jpg",
+      "sizes": "1280x853",
+      "type": "image/jpeg",
+      "purpose": "any"
+    }
+  ],
+  "shortcuts": [
+    {
+      "name": "Thực đơn",
+      "short_name": "Menu",
+      "url": "/#menu",
+      "description": "Xem thực đơn 4P+ Coffee"
+    },
+    {
+      "name": "Đường đến quán",
+      "short_name": "Bản đồ",
+      "url": "/#contact",
+      "description": "Tìm đường đến 120 Trung Kính, Yên Hoà"
+    },
+    {
+      "name": "Gọi đặt bàn",
+      "short_name": "Gọi",
+      "url": "tel:+84966195000",
+      "description": "Gọi 096 6195 000"
+    }
+  ]
+}
