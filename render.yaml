@@ -1,0 +1,101 @@
+# Render.com static site config cho 4P+ Coffee
+# Docs: https://render.com/docs/static-sites
+
+services:
+  - type: web
+    name: 4p-coffee
+    runtime: static
+    buildCommand: ''
+    staticPublishPath: ./
+    pullRequestPreviewsEnabled: false
+
+    # Security headers cho mọi route
+    headers:
+      - path: /*
+        name: X-Frame-Options
+        value: SAMEORIGIN
+      - path: /*
+        name: X-Content-Type-Options
+        value: nosniff
+      - path: /*
+        name: Referrer-Policy
+        value: strict-origin-when-cross-origin
+      - path: /*
+        name: Permissions-Policy
+        value: camera=(), microphone=(), geolocation=()
+      - path: /*
+        name: Strict-Transport-Security
+        value: max-age=31536000; includeSubDomains; preload
+
+      # HTML — bắt buộc revalidate để update content nhanh
+      - path: /
+        name: Cache-Control
+        value: public, max-age=0, s-maxage=300, must-revalidate
+      - path: /*.html
+        name: Cache-Control
+        value: public, max-age=0, s-maxage=300, must-revalidate
+
+      # CSS/JS — cache 7 ngày + SWR (vì filename không có hash version)
+      - path: /*.css
+        name: Cache-Control
+        value: public, max-age=604800, stale-while-revalidate=86400
+      - path: /*.js
+        name: Cache-Control
+        value: public, max-age=604800, stale-while-revalidate=86400
+
+      # ẢNH — cache aggressive 30 ngày + SWR (tối ưu chính)
+      - path: /images/*
+        name: Cache-Control
+        value: public, max-age=2592000, stale-while-revalidate=604800
+      - path: /images/*.jpg
+        name: Cache-Control
+        value: public, max-age=2592000, stale-while-revalidate=604800
+      - path: /images/*.jpeg
+        name: Cache-Control
+        value: public, max-age=2592000, stale-while-revalidate=604800
+      - path: /images/*.png
+        name: Cache-Control
+        value: public, max-age=2592000, stale-while-revalidate=604800
+      - path: /images/*.webp
+        name: Cache-Control
+        value: public, max-age=2592000, stale-while-revalidate=604800
+
+      # Fonts (nếu sau này host local) — 1 năm immutable
+      - path: /*.woff2
+        name: Cache-Control
+        value: public, max-age=31536000, immutable
+      - path: /*.woff2
+        name: Access-Control-Allow-Origin
+        value: '*'
+
+      # SEO files
+      - path: /sitemap.xml
+        name: Cache-Control
+        value: public, max-age=3600
+      - path: /robots.txt
+        name: Cache-Control
+        value: public, max-age=86400
+      - path: /manifest.webmanifest
+        name: Content-Type
+        value: application/manifest+json
+      - path: /manifest.webmanifest
+        name: Cache-Control
+        value: public, max-age=604800
+
+    # Redirect / rewrite
+    routes:
+      - type: redirect
+        source: /index.html
+        destination: /
+      - type: redirect
+        source: /home
+        destination: /
+      - type: redirect
+        source: /menu
+        destination: /#menu
+      - type: redirect
+        source: /lien-he
+        destination: /#contact
+      - type: redirect
+        source: /faq
+        destination: /#faq

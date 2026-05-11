@@ -1,4 +1,78 @@
+# robots.txt for 4P+ Coffee — https://fourp-coffee.onrender.com/
+# Updated: 2026-05-11
+# Production domain (sẽ thay khi có domain custom)
+
 User-agent: *
 Allow: /
+Disallow: /scrape-fb.mjs
+Disallow: /upgrade-images.mjs
+Disallow: /node_modules/
+Disallow: /package.json
+Disallow: /package-lock.json
+Disallow: /images/_debug-*
+Disallow: /*.json$
+Allow: /manifest.webmanifest
 
-Sitemap: https://4pcoffee.vn/sitemap.xml
+# Specific Google bots — explicit allow + crawl delay 0 (default)
+User-agent: Googlebot
+Allow: /
+
+User-agent: Googlebot-Image
+Allow: /images/
+
+User-agent: Googlebot-Mobile
+Allow: /
+
+User-agent: AdsBot-Google
+Allow: /
+
+# Bing
+User-agent: Bingbot
+Allow: /
+
+# Yandex (may rank in Vietnam too)
+User-agent: Yandex
+Allow: /
+
+# Facebook crawler for OG image preview
+User-agent: facebookexternalhit
+Allow: /
+
+# Twitter
+User-agent: Twitterbot
+Allow: /
+
+# Block aggressive scrapers
+User-agent: AhrefsBot
+Crawl-delay: 10
+
+User-agent: SemrushBot
+Crawl-delay: 10
+
+User-agent: MJ12bot
+Disallow: /
+
+User-agent: DotBot
+Disallow: /
+
+# AI training crawlers — quán có thể không muốn cho phép
+User-agent: GPTBot
+Disallow: /
+
+User-agent: ClaudeBot
+Disallow: /
+
+User-agent: CCBot
+Disallow: /
+
+User-agent: anthropic-ai
+Disallow: /
+
+User-agent: Google-Extended
+Disallow: /
+
+# Sitemap
+Sitemap: https://fourp-coffee.onrender.com/sitemap.xml
+
+# Host directive (Yandex)
+Host: fourp-coffee.onrender.com

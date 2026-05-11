@@ -1,0 +1,16 @@
+/* TEAM */
+    Quán cà phê: 4P+ Coffee
+    Địa chỉ: 120 Trung Kính, phường Yên Hoà, quận Cầu Giấy, Hà Nội
+    Điện thoại: 096 6195 000
+    Facebook: facebook.com/profile.php?id=61587287768345
+    TikTok: tiktok.com/@4Pcoffeexinchao
+
+/* SITE */
+    Last update: 2026/05/11
+    Language: Vietnamese (vi-VN)
+    Standards: HTML5, CSS3, ES2020
+    Components: Vanilla JavaScript, no frameworks
+    Software: Visual Studio Code
+
+/* SAY HELLO */
+    ☕ Một tách cà phê, một khoảng lặng giữa Hà Nội.

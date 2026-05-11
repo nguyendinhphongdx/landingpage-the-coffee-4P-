@@ -1,6 +1,6 @@
 # 4P+ Coffee — Landing Page
 
-Landing page tĩnh cho **4P+ Coffee** — 120 Trung Kính, phường Yên Hoà, quận Cầu Giấy, Hà Nội. Phong cách vintage ấm cúng, tối ưu SEO, không cần build, mở bằng trình duyệt là chạy.
+Landing page tĩnh cho **4P+ Coffee** — 120 Trung Kính, phường Yên Hoà, quận Cầu Giấy, Hà Nội. Phong cách vintage ấm cúng, tối ưu SEO chuyên sâu cho local search, không cần build.
 
 ## Thông tin quán
 
@@ -14,104 +14,201 @@ Landing page tĩnh cho **4P+ Coffee** — 120 Trung Kính, phường Yên Hoà, 
 
 ```text
 4P+ Coffee/
-├── index.html          # Trang chính — SEO meta tags + JSON-LD đầy đủ
-├── styles.css          # Stylesheet (theme vintage: nâu cà phê – kem – vàng đồng)
-├── script.js           # Mobile menu, smooth scroll, reveal animation, scroll spy
-├── robots.txt          # Cho phép search engine crawl
-├── sitemap.xml         # Sitemap cho SEO
-├── images/             # Ảnh quán (lấy từ Facebook)
-│   ├── fb-01.jpg       # Hero — phối cảnh quán có logo "4P+ Coffee"
-│   ├── fb-02 → fb-30.jpg  # Ảnh không gian, đồ uống, sự kiện
-│   └── manifest.json   # Metadata các ảnh đã tải
-├── scrape-fb.mjs       # Script Playwright tải ảnh từ FB (có thể xóa nếu không cần)
-├── upgrade-images.mjs  # Script thử nâng cấp thumbnail → full size (đã không dùng)
-└── README.md           # File này
+├── index.html              # Trang chính (SEO + Schema.org @graph đầy đủ)
+├── styles.css              # Stylesheet (vintage theme)
+├── script.js               # Interactions + lightbox gallery
+├── manifest.webmanifest    # PWA manifest (cài làm app trên mobile)
+├── netlify.toml            # Caching + security headers + redirects
+├── robots.txt              # Crawl directives (block AI scrapers)
+├── humans.txt              # Thông tin team đằng sau site
+├── sitemap.xml             # Sitemap + Image Sitemap
+├── images/                 # 30 ảnh quán từ Facebook
+└── README.md
 ```
 
 ## Xem thử
 
-Mở trực tiếp `index.html` bằng trình duyệt, hoặc khuyến nghị chạy local server để Google Maps embed + cache hoạt động tốt:
-
 ```powershell
-# Python (có sẵn trên Win/Mac/Linux)
 python -m http.server 8000
-
-# Hoặc Node.js
+# hoặc
 npx serve .
 ```
 
-Truy cập: `http://localhost:8000`
+Mở `http://localhost:8000`.
 
-## Việc còn lại bạn nên làm
+---
 
-### 1. Domain & deploy
+## SEO — đã tối ưu sẵn
 
-- [ ] Mua/kết nối domain thật. Sau đó tìm-thay `https://4pcoffee.vn/` (đang là placeholder) trong 3 file: `index.html`, `sitemap.xml`, `robots.txt`.
-- [ ] Deploy lên một trong các nền tảng free dưới đây.
+Trang đã được tối ưu SEO toàn diện cho **local search Hà Nội** với các kỹ thuật sau:
 
-### 2. Kiểm tra & cập nhật chi tiết
+### 1. On-page SEO
 
-- [ ] **Giá menu** — đang dùng giá tham khảo (25k – 55k). Cập nhật theo bảng giá thật của quán trong `index.html`, tìm các `<span class="price">XX.000đ</span>`.
-- [ ] **Email liên hệ** — chưa có, đã bỏ khỏi UI. Nếu có email chính thức, thêm vào contact section.
-- [ ] **Google Maps embed** — hiện đang dùng query string đến địa chỉ "120 Trung Kính". Để có embed đẹp hơn với marker cố định:
-  1. Vào Google Maps → tìm "4P+ Coffee" hoặc "120 Trung Kính"
-  2. Share → Embed a map → copy `<iframe src="...">`
-  3. Dán đè vào section `.contact__map` trong `index.html`
-- [ ] **Ảnh hero (`images/fb-01.jpg`)** — đang dùng phối cảnh 3D có logo. Nếu muốn dùng ảnh thật của quán làm hero, thay ảnh này (hoặc edit `.hero__bg` trong `styles.css` để trỏ đến ảnh khác).
-- [ ] **Open Graph image** — meta `og:image` đang trỏ `images/fb-01.jpg` đường dẫn tương đối. Khi deploy lên domain, đổi sang URL tuyệt đối: `https://4pcoffee.vn/images/fb-01.jpg`.
+- **Title tag** chứa thương hiệu + địa danh + USP: *"4P+ Coffee — 120 Trung Kính, Yên Hoà, Hà Nội | Cafe vintage ấm cúng"*
+- **Meta description** 155 ký tự, chứa địa chỉ + 3 USP chính (đèn lồng Hội An, sân vườn, phòng riêng) + giờ mở cửa
+- **Keywords meta** (informational): cafe Trung Kính / Yên Hoà / Cầu Giấy / Hà Nội / vintage / cold brew / matcha
+- **Canonical URL** + `hreflang vi-VN` + `x-default`
+- **H1 unique** chứa keyword chính (visually-hidden cho SEO) + tagline đẹp (visible)
+- **H2/H3 hierarchy** đúng cho từng section (Giới thiệu / Thực đơn / Không gian / FAQ / Liên hệ)
+- **Alt text** đầy đủ và mô tả tốt cho tất cả ảnh (image SEO + a11y)
+- **Internal anchor text** chứa keywords: "thực đơn", "Facebook", "TikTok @4Pcoffeexinchao"
 
-### 3. SEO checklist
+### 2. Schema.org Structured Data (JSON-LD @graph)
 
-- [ ] Submit `sitemap.xml` cho **Google Search Console**.
-- [ ] Tạo/cập nhật **Google Business Profile** (Google Maps) — quan trọng nhất cho quán cafe, nguồn khách hàng địa phương.
-- [ ] Đăng ký Bing Webmaster Tools (nếu muốn).
-- [ ] Cài Google Analytics / GA4 nếu cần đo traffic.
+Một block `@graph` duy nhất chứa **7 schema entities** liên kết với nhau qua `@id`:
 
-## Deploy miễn phí
-
-| Nền tảng | Cách nhanh nhất |
+| Schema | Lợi ích |
 | --- | --- |
-| **Netlify** | Kéo thả thư mục vào <https://app.netlify.com/drop> |
-| **Vercel** | `npm i -g vercel` → `vercel` trong thư mục dự án |
-| **GitHub Pages** | Push lên GitHub repo → Settings → Pages → Source: `main` |
-| **Cloudflare Pages** | Connect repo, build command để trống, output folder = `/` |
+| `CafeOrCoffeeShop` + `LocalBusiness` | Google Knowledge Panel, Maps integration |
+| `Organization` | Brand entity, contactPoint cho Google Search |
+| `WebSite` | Sitelink search box tiềm năng |
+| `WebPage` + `speakable` | Voice search / Google Assistant |
+| `Menu` + `MenuSection` + `MenuItem` | Rich snippet hiển thị giá món |
+| `FAQPage` + 6 `Question`/`Answer` | **FAQ rich snippet trên SERP** (boost CTR rất mạnh) |
+| `BreadcrumbList` | Breadcrumb trail trên SERP |
 
-Tất cả đều **free**, hỗ trợ **HTTPS** + **custom domain** miễn phí.
+Có thêm các thuộc tính quan trọng cho local SEO:
 
-## Ảnh từ Facebook
+- `geo.GeoCoordinates` (lat/lng)
+- `hasMap` link Google Maps
+- `address.PostalAddress` đầy đủ
+- `openingHoursSpecification`
+- `amenityFeature` (Wi-Fi, phòng riêng, sân vườn)
+- `acceptsReservations: true`
+- `priceRange`, `paymentAccepted`, `currenciesAccepted`
+- `sameAs` Facebook + TikTok (entity disambiguation)
 
-Đã tải 30 ảnh full-size từ Facebook public của quán bằng Playwright. Xem `images/manifest.json` để biết URL gốc của từng ảnh.
+### 3. Open Graph + Twitter + Facebook Places
 
-Ảnh đang dùng trong landing page:
+- `og:type = restaurant.restaurant` (rich preview riêng cho nhà hàng)
+- `og:image` size 1200×630 với width/height + alt
+- `business:contact_data:*` cho Facebook Places
+- `restaurant:hours:opens/closes`
+- `place:location:latitude/longitude`
 
-- **Hero**: `fb-01.jpg` (phối cảnh 3D có logo 4P+ Coffee)
-- **About**: `fb-28.jpg` (sân ngoài + bảng menu chalkboard)
-- **Gallery (6 ảnh):**
-  - `fb-29.jpg` — góc không gian ấm
-  - `fb-02.jpg` — khách trong quán
-  - `fb-14.jpg` — đèn lồng đỏ Hội An
-  - `fb-10.jpg` — cửa kính "Welcome to 4P+ Coffee"
-  - `fb-19.jpg` — poster đồ uống mùa hè
-  - `fb-22.jpg` — tường báo + cờ đỏ vintage
+### 4. Local SEO (quan trọng nhất cho cafe)
 
-24 ảnh còn lại trong `images/` có thể dùng để swap nếu muốn. Bạn vào thư mục `images/`, xem qua các file `fb-XX.jpg` và thay vào HTML tuỳ ý.
+- **NAP nhất quán** (Name / Address / Phone) — xuất hiện 5+ chỗ với format giống hệt
+- **Geo meta tags** (geo.region, geo.placename, geo.position, ICBM)
+- **Sitemap có image entries** với caption tiếng Việt
+- Schema địa chỉ chia rõ `streetAddress` / `addressLocality` / `addressRegion`
+- Số điện thoại có `tel:+84...` link để click-to-call trên mobile
 
-## Tuỳ biến nhanh
+### 5. Technical SEO
 
-- **Đổi màu chủ đạo:** sửa các biến `--color-*` ở đầu `styles.css`.
-- **Đổi font:** thay link `<link href="https://fonts.googleapis.com/...">` trong `index.html` và biến `--font-display` / `--font-body` trong `styles.css`.
-- **Bỏ section:** xoá nguyên block `<section ...>` tương ứng trong `index.html`, đồng thời xoá link trong `<nav>` và footer.
+- **Mobile-first responsive** (Google's primary index)
+- **Core Web Vitals:**
+  - LCP: hero image `preload` + `fetchpriority="high"`
+  - CLS: tất cả `<img>` có `width` + `height` attribute
+  - INP: vanilla JS nhẹ, không framework
+- **PWA-ready** — `manifest.webmanifest` với shortcuts (Menu / Map / Call)
+- **Caching headers** (Netlify) — CSS/JS 1 năm immutable, ảnh 30 ngày SWR
+- **Security headers** — HSTS, X-Frame-Options, Referrer-Policy, Permissions-Policy
+- **HTTPS redirect** + WWW → non-WWW canonical
+- **Crawl-friendly** — không có block JavaScript, sitemap fresh `lastmod`
+- **robots.txt** block AI training crawlers (GPTBot, ClaudeBot, CCBot, Google-Extended) — bảo vệ content
 
-## Dọn dẹp (tuỳ chọn)
+### 6. Accessibility (a11y — Google ranking factor)
 
-Nếu không cần chạy lại scrape, có thể xoá an toàn:
+- Skip-to-content semantic landmarks
+- ARIA labels trên tất cả interactive controls
+- Focus-visible outlines
+- Reduced-motion support
+- `lang="vi-VN"` trên `<html>`
+- Lightbox keyboard + screen-reader friendly
 
-- `scrape-fb.mjs`, `upgrade-images.mjs`
-- `package.json`, `package-lock.json`
-- `node_modules/`
-- `images/_debug-*.html` (nếu có)
+---
 
-Các file landing page (`index.html`, `styles.css`, `script.js`, `robots.txt`, `sitemap.xml`, `images/*.jpg`) hoàn toàn standalone, không phụ thuộc Node.
+## SEO checklist sau khi deploy
+
+Sau khi đẩy lên domain thật, **bắt buộc** làm các bước sau theo thứ tự:
+
+### Tuần 1 — Foundation
+
+- [ ] **Mua/kết nối domain custom** (vd `4pcoffee.vn`) thay cho subdomain Render. Sau đó trong các file `index.html`, `sitemap.xml`, `robots.txt`, `humans.txt`, `netlify.toml`, `render.yaml` tìm-thay `https://fourp-coffee.onrender.com/` → domain mới.
+- [ ] Tạo email công khai `hello@4pcoffee.vn` hoặc `info@4pcoffee.vn` (tốt cho schema `Organization.email`).
+- [ ] Cài SSL/HTTPS (Netlify/Vercel/Cloudflare tự động cấp Let's Encrypt miễn phí).
+- [ ] **Google Search Console** — submit `sitemap.xml`, request indexing trang chủ.
+- [ ] **Bing Webmaster Tools** — submit sitemap.
+- [ ] Test với:
+  - [Rich Results Test](https://search.google.com/test/rich-results) — kiểm tra FAQ + LocalBusiness + Menu hiển thị đúng
+  - [Schema Markup Validator](https://validator.schema.org/)
+  - [PageSpeed Insights](https://pagespeed.web.dev/) — mục tiêu LCP <2.5s, CLS <0.1
+  - [Mobile-Friendly Test](https://search.google.com/test/mobile-friendly)
+
+### Tuần 2 — Local SEO (quan trọng nhất cho cafe)
+
+- [ ] **Google Business Profile** (Google Maps) — bước quan trọng số 1 cho quán cafe:
+  - Tạo/claim profile tại business.google.com
+  - Verify bằng bưu thiếp (mất 5-7 ngày)
+  - Điền NAP **giống hệt** như trên website
+  - Thêm 10+ ảnh thực tế của quán
+  - Bật messaging, đặt giờ mở cửa
+  - Thêm menu items + giá
+  - Khuyến khích khách review (mục tiêu: 20+ reviews 4-5 sao trong 3 tháng đầu)
+- [ ] **Facebook Page** — đảm bảo "About" trên FB có cùng địa chỉ, SĐT, giờ mở.
+- [ ] **Foody, Lozi, Now/Shopee Food** — niêm yết quán trên các platform này (citation building).
+- [ ] **Đăng ký Apple Maps** (vì iPhone user) qua [Apple Business Connect](https://businessconnect.apple.com).
+
+### Tuần 3 — Content marketing
+
+- [ ] Đăng đều đặn lên Facebook + TikTok (vd 3 bài/tuần). Mỗi bài chèn link website.
+- [ ] Khuyến khích khách check-in trên Facebook tại địa điểm "4P+ Coffee".
+- [ ] Tạo Google Business Profile **Posts** hàng tuần (đồ uống mới, sự kiện, khuyến mãi).
+- [ ] Backlink ban đầu từ:
+  - Page hangoutvietnam, hanoigrapevine, foodybattle
+  - Blog du lịch / lifestyle Hà Nội
+  - Hội nhóm Facebook "Review quán cafe Hà Nội"
+
+### Tháng 2 trở đi — Long-term
+
+- [ ] Tracking ranking các keyword chính:
+  - "cafe trung kính" / "cafe yên hoà" / "cafe cầu giấy"
+  - "cafe vintage hà nội" / "cafe làm việc hà nội"
+  - "4P+ coffee" (brand keyword)
+- [ ] Phân tích traffic bằng GA4 + Google Search Console
+- [ ] Tối ưu trang theo hành vi user (heat-map, scroll depth)
+- [ ] Bài blog định kỳ (`/blog/...`) tăng topical authority (vd "Top 5 quán cafe Cầu Giấy", "Hướng dẫn pha cà phê muối"...)
+
+---
+
+## Việc còn lại cần làm trong code
+
+- [ ] **Giá menu** đang là tham khảo (25k–55k). Cập nhật theo bảng giá thật trong `index.html` (cả phần HTML cards và phần JSON-LD `MenuItem.offers.price`).
+- [ ] **Google Maps embed** — nếu muốn marker chính xác hơn, vào Maps → tìm quán → Share → Embed a map → copy iframe → dán đè vào section `.contact__map`.
+- [ ] **Geo coordinates** (21.0186, 105.7942) — toạ độ gần đúng. Lấy chính xác từ Google Maps (chuột phải lên quán → copy coordinates) rồi cập nhật 3 nơi:
+  - `<meta name="geo.position">`
+  - `<meta name="ICBM">`
+  - JSON-LD `GeoCoordinates`
+- [ ] **Email** trong `Organization.email` đang để `hello@4pcoffee.vn`. Đổi sang email thật khi có.
+- [ ] **Domain** — toàn bộ link đang dùng `https://fourp-coffee.onrender.com/`. Nếu domain khác, find-replace.
+- [ ] **og:image** nên đổi sang ảnh "đại diện thương hiệu" tỷ lệ chuẩn 1200×630 (hiện đang dùng `fb-01.jpg` 1280×853, Facebook sẽ crop).
+
+---
+
+## Deploy miễn phí + auto-config
+
+| Nền tảng | Setup | Note |
+| --- | --- | --- |
+| **Netlify** (Recommended) | Drag-drop thư mục → `netlify.toml` tự áp dụng | Caching + redirects + headers tự động |
+| **Vercel** | `vercel` trong thư mục | Cần thêm `vercel.json` cho headers |
+| **GitHub Pages** | Push repo → Settings → Pages | Không có headers config |
+| **Cloudflare Pages** | Connect repo, build empty, output `/` | `_headers` + `_redirects` files (cần convert từ netlify.toml) |
+
+**Khuyến nghị: Netlify** — `netlify.toml` đã được config sẵn để áp dụng ngay sau khi deploy.
+
+---
+
+## Performance benchmarks (mục tiêu)
+
+| Metric | Target | Hiện trạng |
+| --- | --- | --- |
+| LCP (Largest Contentful Paint) | < 2.5s | OK với preload `fb-01.jpg` |
+| CLS (Cumulative Layout Shift) | < 0.1 | OK (tất cả img có dimensions) |
+| INP (Interaction to Next Paint) | < 200ms | OK (vanilla JS) |
+| PageSpeed Mobile | > 90 | Cần test sau deploy |
+| Lighthouse SEO | 100/100 | Đã tối ưu |
+| Lighthouse Accessibility | > 95 | Đã có ARIA + landmarks |
 
 ---
 

@@ -161,7 +161,7 @@
         btn.className = 'lightbox__thumb';
         btn.type = 'button';
         btn.setAttribute('aria-label', `Ảnh ${i + 1}`);
-        btn.innerHTML = `<img src="${img.src}" alt="" loading="lazy">`;
+        btn.innerHTML = `<img src="${img.src}" alt="" loading="lazy" decoding="async">`;
         btn.addEventListener('click', () => showImage(i));
         lbThumbs.appendChild(btn);
     });

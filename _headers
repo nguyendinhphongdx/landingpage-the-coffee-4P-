@@ -1,0 +1,46 @@
+# Fallback _headers file (Netlify/Cloudflare Pages compat)
+# Render và một số platform cũng đọc file này.
+# Cấu hình chính cho Render xem ở render.yaml; cho Netlify xem ở netlify.toml.
+
+/*
+  X-Frame-Options: SAMEORIGIN
+  X-Content-Type-Options: nosniff
+  Referrer-Policy: strict-origin-when-cross-origin
+  Permissions-Policy: camera=(), microphone=(), geolocation=()
+  Strict-Transport-Security: max-age=31536000; includeSubDomains; preload
+
+# HTML — cache ngắn
+/
+  Cache-Control: public, max-age=0, s-maxage=300, must-revalidate
+
+/*.html
+  Cache-Control: public, max-age=0, s-maxage=300, must-revalidate
+
+# CSS / JS — 7 ngày + stale-while-revalidate
+/*.css
+  Cache-Control: public, max-age=604800, stale-while-revalidate=86400
+
+/*.js
+  Cache-Control: public, max-age=604800, stale-while-revalidate=86400
+
+# ẢNH — 30 ngày cache, 7 ngày stale-while-revalidate
+/images/*
+  Cache-Control: public, max-age=2592000, stale-while-revalidate=604800
+  X-Content-Type-Options: nosniff
+
+# Fonts (local) — 1 năm immutable
+/*.woff2
+  Cache-Control: public, max-age=31536000, immutable
+  Access-Control-Allow-Origin: *
+
+# SEO files
+/sitemap.xml
+  Cache-Control: public, max-age=3600
+  Content-Type: application/xml; charset=utf-8
+
+/robots.txt
+  Cache-Control: public, max-age=86400
+
+/manifest.webmanifest
+  Cache-Control: public, max-age=604800
+  Content-Type: application/manifest+json
